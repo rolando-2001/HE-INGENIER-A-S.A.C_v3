@@ -1,0 +1,97 @@
+---
+// No necesitas código en el bloque de Astro para este componente
+---
+
+<style>
+  @keyframes bounce {
+    0%,
+    20%,
+    53%,
+    80%,
+    100% {
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      transform: translate3d(0, 0, 0);
+    }
+    40%,
+    43% {
+      transition-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      transform: translate3d(0, -30px, 0);
+    }
+    70% {
+      transition-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      transform: translate3d(0, -15px, 0);
+    }
+    90% {
+      transform: translate3d(0, -4px, 0);
+    }
+  }
+
+  .whatsApp {
+    position: fixed;
+    width: auto;
+    height: auto;
+    right: 10px;
+    bottom: 10px;
+    text-align: center;
+    padding: 10px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 45px !important;
+    text-decoration: none;
+    font-weight: bold;
+    animation: bounce 2.3s infinite;
+  }
+
+  .whatsApp img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .whatsApp:hover {
+    background-color: #1da851;
+  }
+</style>
+
+<a
+  href="https://api.whatsapp.com/send?phone=+51917549994&text=Hola tengo una consulta..."
+  class="whatsApp"
+  target="_blank"
+  id="whatsAppLink"
+>
+  <img src="/WhatsApp.webp" alt="WhatsApp" width="50" height="50" />
+</a>
+<script>
+  // @ts-ignore
+  import Typewriter from "typewriter-effect/dist/core";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const whatsAppLink = document.getElementById("whatsAppLink");
+
+    function createText() {
+      const spanW = document.createElement("span");
+      spanW.id = "text-w";
+      spanW.classList.add("text-w");
+      whatsAppLink!.appendChild(spanW);
+
+      new Typewriter(spanW, {
+        autoStart: true,
+        loop: false,
+        delay: 75,
+      })
+        .typeString("Escríbenos por <br> WhatsApp")
+        .pauseFor(1000)
+        .deleteAll()
+        .callFunction(() => {
+          spanW.remove();
+          setTimeout(createText, 3000);
+        })
+        .start();
+    }
+
+    setTimeout(createText, 3000);
+  });
+</script>

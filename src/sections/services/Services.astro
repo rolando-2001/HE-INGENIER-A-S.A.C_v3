@@ -1,0 +1,27 @@
+---
+import Tag from "@components/ui/Tag.astro";
+import TitleSection from "@components/ui/TitleSection.astro";
+import SectionLayout from "@layouts/SectionLayout.astro";
+import { ServiceCard } from "@sections/services/components/ServiceCard";
+---
+
+<SectionLayout
+  id="services"
+  class="bg-slate-100 text-black py-20"
+>
+  <div class="mb-16">
+    <Tag text="Nuestros Servicios" mode="light" />
+    <TitleSection
+      underlineText="ingeniería"
+      breakPart="ingeniería"
+      title="Soluciones de ingeniería especializadas"
+    />
+    <p class="text-gray-600 text-lg leading-relaxed max-w-4xl">
+      En <span class="font-semibold text-primary">HE INGENIERÍA S.A.C.</span> ofrecemos
+      soluciones de ingeniería especializadas en proyectos de infraestructura eléctrica,
+      sistemas de protección a tierra y mantenimiento eléctrico.
+    </p>
+  </div>
+
+  <ServiceCard client:visible />
+</SectionLayout>

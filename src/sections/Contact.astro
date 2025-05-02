@@ -1,0 +1,153 @@
+---
+import ContactItem from "@components/ContactItem.astro";
+import Input from "@components/ui/Input.astro";
+import Tag from "@components/ui/Tag.astro";
+import TitleSection from "@components/ui/TitleSection.astro";
+import SectionLayout from "@layouts/SectionLayout.astro";
+---
+
+<SectionLayout
+  id="contact"
+  class="bg-primary text-white py-20"
+> 
+<div class="mb-16">
+  <Tag text="Contáctanos" mode="dark" />
+  <TitleSection
+    underlineText="duda"
+    breakPart="duda"
+    title="¿Tienes alguna duda o consulta?"
+  />
+  <p class="text-gray-300 text-lg my-10 leading-relaxed max-w-4xl">
+    Escríbenos y te responderemos a la brevedad.
+  </p>
+</div>
+  <div class={"grid md:grid-cols-2 gap-12"}>
+    <div class="space-y-8">
+      <ContactItem icon="phone" title="Teléfono" value="983113550" />
+      <ContactItem icon="mail" title="Email" value="info@heingenieria.com" />
+      <ContactItem
+        icon="map-pin"
+        title="Dirección"
+        value="JR. SAN IGNACIO NRO. 523 - SMP"
+      />
+    </div>
+
+    <form class="space-y-6 bg-[#1D2D50] p-8 rounded-lg shadow-lg">
+      <Input
+        id="subject"
+        type="text"
+        name="subject"
+        id="subject"
+        placeholder="Asunto"
+      />
+      <Input
+        id="email"
+        type="text"
+        name="email"
+        id="email"
+        placeholder="Tu Email"
+      />
+      <textarea
+        id="message"
+        name="message"
+        id="message"
+        rows="5"
+        placeholder="Tu Mensaje"
+        class="w-full p-4 rounded-lg bg-[#0A2239] border border-gray-600
+           focus:border-[#F4A261] focus:ring-2 focus:ring-[#F4A261]
+           transition-all duration-200 text-white"
+      ></textarea>
+      <button
+        id="btn"
+        type="submit"
+        class="bg-tertiary w-full flex justify-center cursor-pointer items-center gap-x-2 hover:bg-blue-700 text-white px-8 py-3 rounded-md font-semibold transition transform hover:scale-105 duration-200"
+      >
+        <i data-lucide="mail"></i>
+        <span>Enviar Mensaje</span>
+      </button>
+    </form>
+  </div>
+</SectionLayout>
+
+<script>
+  import "native-toast/dist/native-toast.css";
+  // @ts-ignore
+  import nativeToast from "native-toast";
+
+  import { actions } from "astro:actions";
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const form = document.querySelector("form") as HTMLFormElement;
+  const subjectElement = document.querySelector("#subject") as HTMLInputElement;
+  const emailElement = document.querySelector("#email") as HTMLInputElement;
+  const messageElement = document.querySelector("#message") as HTMLInputElement;
+  const btn = document.querySelector("#btn") as HTMLButtonElement;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const subject = subjectElement ? subjectElement.value.trim() : "";
+    const email = emailElement ? emailElement.value.trim() : "";
+    const message = messageElement ? messageElement.value.trim() : "";
+
+    const btnSpan = btn?.querySelector("span");
+    
+      
+    
+    if (!subject || !email || !message) {
+      nativeToast({
+        message: "Por favor, completa todos los campos.",
+        position: "north-east",
+        timeout: 3000,
+        type: "error",
+      });
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      nativeToast({
+        message: "Por favor, ingresa un email válido.",
+        position: "north-east",
+        timeout: 3000,
+        type: "error",
+      });
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("subject", subject);
+    formData.append("email", email);
+    formData.append("message", message);
+
+    btn.disabled = true;
+    btnSpan!.textContent = "Enviando...";
+    try {
+      const { error, data } = await actions.EmailSend(formData);
+      if (error) {
+        nativeToast({
+          message: "Ocurrió un error al enviar el mensaje.",
+          position: "north-east",
+          timeout: 3000,
+          type: "error",
+        });
+        return;
+      }
+      console.log(data);
+      if (data) {
+        nativeToast({
+          message: "Mensaje enviado correctamente.",
+          position: "north-east",
+          timeout: 3000,
+          type: "success",
+        });
+        form.reset();
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      btn.disabled = false;
+      btnSpan!.textContent = "Enviar Mensaje";
+    }
+  });
+</script>

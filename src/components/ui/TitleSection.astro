@@ -1,0 +1,51 @@
+---
+interface TitleSectionProps {
+  title: string;
+  underlineText: string;
+  breakPart: string;
+  mode: "light" | "dark";
+}
+
+const { title, underlineText, breakPart, mode } = Astro.props as TitleSectionProps;
+
+const titleWords = title.split(" ").map((word, index) => {
+  return word + (index !== title.split(" ").length - 1 ? " " : "");
+});
+---
+
+<h2
+  class:list={[
+    "text-3xl md:text-4xl font-bold mb-6 leading-tight",
+    mode === "dark" && "text-white",
+    mode === "light" && "text-primary",
+  ]}
+>
+  {
+    titleWords.map((word) => (
+      <>
+        {breakPart && word.trim() === breakPart ? <br /> : ""}
+        {word.trim() === underlineText ? (
+          <span class="relative inline-block me-1.5">
+            {underlineText}
+            <svg
+              class="absolute -bottom-2 w-full"
+              height="6"
+              viewBox="0 0 280 6"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 5C71.6667 1 141.667 1 280 5"
+                stroke="#60A5FA"
+                stroke-width="4"
+                stroke-linecap="round"
+              />
+            </svg>
+          </span>
+        ) : (
+          word
+        )}
+      </>
+    ))
+  }
+</h2>

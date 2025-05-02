@@ -1,0 +1,58 @@
+---
+import "@fontsource-variable/outfit";
+import { ClientRouter } from "astro:transitions";
+import "@styles/global.css";
+import Header from "@components/Header.astro";
+import WhatsApp from "@components/WhatsApp.astro";
+import Footer from "@components/Footer.astro";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="HE INGENIERÍA S.A.C ofrece soluciones innovadoras en ingeniería."
+    />
+    <meta
+      name="keywords"
+      content="ingeniería, construcción, tecnología, proyectos, Perú"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="HE INGENIERÍA S.A.C" />
+    <meta
+      property="og:description"
+      content="Soluciones innovadoras en ingeniería y tecnología."
+    />
+    <meta property="og:image" content="/logo.svg" />
+    <title>HE INGENIERÍA S.A.C</title>
+    <ClientRouter />
+  </head>
+  <body id="root">
+    <Header />
+    <slot />
+    <WhatsApp />
+    <Footer />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Outfit Variable", sans-serif;
+  }
+  
+  
+</style>
+
+<script>
+  import { createIcons, icons } from "lucide";
+  createIcons({ icons });
+</script>

@@ -1,0 +1,162 @@
+---
+import Tag from "@components/ui/Tag.astro";
+import TitleSection from "@components/ui/TitleSection.astro";
+import SectionLayout from "@layouts/SectionLayout.astro";
+---
+
+<SectionLayout id="about" class="bg-primary text-white py-20">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+      <div>
+        
+        <Tag text="Sobre Nosotros" mode="dark" />
+
+        <TitleSection title="Construcción y Mantenimiento Industrial"
+          underlineText="Mantenimiento" 
+           breakPart="Mantenimiento" />
+          
+        <p class="text-slate-300 text-lg leading-relaxed mb-8">
+          En <span class="font-semibold text-white">HE INGENIERÍA S.A.C.</span> nos
+          especializamos en ingeniería y construcción de alta calidad. Contamos con
+          un equipo altamente capacitado para llevar a cabo proyectos de infraestructura
+          eléctrica, sistemas de protección a tierra y mantenimiento eléctrico.
+        </p>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-center gap-3">
+            <div
+              class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-900/50 flex items-center justify-center"
+            >
+              <!-- <CheckCircle class="h-4 w-4 text-blue-400" /> -->
+              <i data-lucide="check-circle" class="w-4 h-4 text-blue-400"></i>
+            </div>
+            <p class="text-slate-300">Proyectos de infraestructura eléctrica</p>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div
+              class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-900/50 flex items-center justify-center"
+            >
+              <i data-lucide="check-circle" class="w-4 h-4 text-blue-400"></i>
+            </div>
+            <p class="text-slate-300">Sistemas de protección a tierra</p>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div
+              class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-900/50 flex items-center justify-center"
+            >
+              <!-- <CheckCircle class="h-4 w-4 text-blue-400" /> -->
+              <i data-lucide="check-circle" class="w-4 h-4 text-blue-400"></i>
+            </div>
+            <p class="text-slate-300">Mantenimiento eléctrico especializado</p>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div
+              class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-900/50 flex items-center justify-center"
+            >
+              <!-- <CheckCircle class="h-4 w-4 text-blue-400" /> -->
+              <i data-lucide="check-circle" class="w-4 h-4 text-blue-400"></i>
+            </div>
+            <p class="text-slate-300">Equipo altamente capacitado</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="#about"
+            class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+          >
+            Nuestros Servicios
+          </a>
+          <a
+            href="#contact"
+            class="inline-flex items-center justify-center border border-slate-700 hover:border-blue-500 text-white font-medium py-3 px-6 rounded-lg transition-colors group"
+          >
+            <span>Contáctanos</span>
+            <i
+              data-lucide="arrow-right"
+              class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform"
+            ></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 grid-rows-3 md:grid-rows-2 gap-3 md:gap-4 md:m-4 md:h-[500px]"
+        >
+          <div
+            class="col-start-1 row-start-1 md:col-start-1 md:row-start-1 md:col-span-1 md:row-span-2 bg-gray-300 rounded-md"
+          >
+            <img
+              src="/aboutUs/img1.png"
+              class="w-full h-60 md:h-full object-cover"
+              alt="Construcción industrial"
+            />
+          </div>
+          <div
+            class="col-start-1 row-start-2 md:col-start-2 md:row-start-1 md:col-span-1 md:row-span-1 bg-gray-300 rounded-md"
+          >
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-P1GJ3t5SueUWwL5vc3zn6oWRvejNro.png"
+              alt="Construcción industrial"
+              width={600}
+              height={500}
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            class="col-start-1 row-start-3 md:col-start-2 md:row-start-2 md:col-span-1 md:row-span-1 bg-gray-300 rounded-md"
+          >
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-P1GJ3t5SueUWwL5vc3zn6oWRvejNro.png"
+              alt="Construcción industrial"
+              width={600}
+              height={500}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        <div
+          class="absolute -z-10 w-full h-full -bottom-6 -right-6 bg-gradient-to-br from-blue-600 to-blue-900 rounded-lg opacity-20 blur-2xl"
+        >
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="relative bg-gradient-to-r from-blue-600 to-blue-500 rounded-2xl overflow-hidden"
+    >
+      <div class="absolute inset-0 bg-pattern opacity-10"></div>
+      <div class="grid md:grid-cols-2 items-center relative z-10">
+        <div class="p-12 md:p-16">
+          <h3 class="text-3xl font-bold text-white mb-6">
+            ¿Listo para llevar tu proyecto al siguiente nivel?
+          </h3>
+          <p class="text-blue-100 mb-8">
+            Contáctanos hoy mismo para discutir cómo podemos ayudarte con tus
+            necesidades de ingeniería y construcción industrial.
+          </p>
+          <a
+            href="#contact"
+            class="inline-flex items-center bg-white text-blue-600 hover:bg-blue-50 font-medium py-3 px-6 rounded-lg transition-colors"
+          >
+            Solicitar una consulta
+          </a>
+        </div>
+        <div class="h-full">
+          <img
+            src="aboutUs/img2.jpg"
+            alt="Contacto"
+            width={600}
+            height={400}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</SectionLayout>

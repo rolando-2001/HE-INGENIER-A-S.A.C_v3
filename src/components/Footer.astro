@@ -1,0 +1,77 @@
+---
+import { LANDING_SECTIONS } from "@data/routes";
+---
+
+<footer class="bg-gray-900 text-white py-12">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+    {/* About Section */}
+    <div>
+      <h3 class="text-xl font-bold text-[#F4A261] mb-4">Sobre Nosotros</h3>
+      <p class="text-gray-400">
+        Somos una empresa dedicada a la innovación tecnológica, brindando
+        soluciones eficientes y escalables para nuestros clientes.
+      </p>
+    </div>
+
+    {/* Links Section */}
+    <div>
+      <h3 class="text-xl font-bold text-blue-600 mb-4">Enlaces Rápidos</h3>
+      <ul class="space-y-2">
+        {
+          LANDING_SECTIONS.map((section) => (
+            <li>
+              <a href={`#${section.id}`} class="cursor-pointer">
+                {section.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {/* Contact Section */}
+    <div>
+      <h3 class="text-xl font-bold text-[#F4A261] mb-4">Contáctanos</h3>
+      <p class="text-gray-400 mb-3 flex items-center space-x-2">
+        <i data-lucide="phone" class="text-blue-600"></i>
+        <span>983113550</span>
+      </p>
+      <p class="text-gray-400 mb-3 flex items-center space-x-2">
+        <i data-lucide="mail" class="text-blue-600"></i>
+        <span>info@heingenieria.com</span>
+      </p>
+      <p class="text-gray-400 mb-3 flex items-center space-x-2">
+        <i data-lucide="map-pin" class="text-blue-600"></i>
+        <span>JR. SAN IGNACIO NRO. 523 - SMP</span>
+      </p>
+      {/* Social Media */}
+      <div class="flex gap-x-4 mt-4">
+        <a
+          href="#"
+          class="p-3 rounded-full bg-gray-800 hover:bg-blue-600 transition"
+        >
+          <i data-lucide="facebook" class="text-white"></i>
+        </a>
+        <a
+          href="#"
+          class="p-3 rounded-full bg-gray-800 hover:bg-secondary transition"
+        >
+          <i data-lucide="instagram" class="text-white"></i>
+        </a>
+        <a
+          href="#"
+          class="p-3 rounded-full bg-gray-800 hover:bg-blue-600 transition"
+        >
+          <i data-lucide="twitter" class="text-white"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {/* Bottom Section */}
+  <div
+    class="text-center text-gray-500 text-sm mt-8 border-t border-gray-700 pt-4"
+  >
+    &copy; {new Date().getFullYear()} HeIngeniería.hrefdo#s los derechos reservados.
+  </div>
+</footer>

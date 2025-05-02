@@ -1,0 +1,181 @@
+---
+import { LANDING_SECTIONS } from "@data/routes";
+---
+
+<header>
+  <nav
+    class={`fixed top-0 left-0 w-full sm:z-10 z-1  transition-all duration-300 scrolled`}
+  >
+    <div class="mx-auto px-6 py-4 flex items-center justify-between">
+   
+      <div class="flex items-center space-x-3">
+        <img src="/logo.svg" alt="HE Ingeniería" class="w-12 h-12" />
+        <span class="text-xl md:text-2xl font-bold text-white"
+          >HE INGENIERÍA S.A.C.</span
+        >
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex space-x-8 items-center text-white">
+        {
+          LANDING_SECTIONS.map((section) => (
+            <a
+              href={`#${section.id}`}
+              class:list={["cursor-pointer transition font-semibold flex items-center gap-x-2", 
+                section.id === "contact" && "border font-semibold p-3 rounded-xl"
+              ]}
+            >
+              {section.name} {section.id === "contact" && <i data-lucide="phone" class="w-4 h-4" />}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="toggleButton" class="md:hidden text-white cursor-pointer">
+        <i id="icon-open" data-lucide="align-justify" class="w-6 h-6 text-white"
+        ></i>
+        <i id="icon-close" data-lucide="x" class="w-6 h-6 text-white hidden"
+        ></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobileMenu"
+      class="hidden bg-primary/80 absolute top-20 left-0 w-full p-6 text-white"
+    >
+      {
+        LANDING_SECTIONS.map((section) => (
+           <a
+              href={`#${section.id}`}
+              class:list={["cursor-pointer my-3 transition font-semibold flex items-center text-center gap-x-2", 
+                section.id === "contact" && "border font-semibold p-3 rounded-xl"
+              ]}
+            >
+              {section.name} {section.id === "contact" && <i data-lucide="phone" class="w-4 h-4" />}
+            </a>
+        ))
+      }
+    </div>
+  </nav>
+
+
+  <!-- <nav class="absolute top-0 left-0 right-0 z-20">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between py-6">
+            <div class="flex items-center gap-2">
+                <img src="/placeholder.svg?height=40&width=40" alt="HE Logo" width="40" height="40" class="w-10 h-10" />
+                <span class="text-white font-bold text-xl">HE INGENIERÍA S.A.C.</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">
+                    Inicio
+                </a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">
+                    Sobre Nosotros
+                </a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">
+                    Nuestros Servicios
+                </a>
+                <button class="text-white border-white hover:bg-white hover:text-slate-900">
+                    Contáctanos
+                </button>
+            </div>
+
+            <button class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav> -->
+</header>
+
+<script is:inline>
+  const mobileButton = document.querySelector("#toggleButton");
+  const mobileMenu = document.querySelector("#mobileMenu");
+  mobileButton.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+    if (mobileMenu.classList.contains("hidden")) {
+      mobileButton.lastElementChild.classList.add("hidden");
+      mobileButton.firstElementChild.classList.remove("hidden");
+    } else {
+      mobileButton.lastElementChild.classList.remove("hidden");
+      mobileButton.firstElementChild.classList.add("hidden");
+    }
+  });
+
+  function updateStyles() {
+    const width = window.innerWidth;
+
+    if (width > 768) {
+      if (!mobileMenu.classList.contains("hidden")) {
+        mobileMenu.classList.add("hidden");
+        mobileButton.lastElementChild.classList.add("hidden");
+        mobileButton.firstElementChild.classList.remove("hidden");
+      }
+    }
+  }
+
+  window.addEventListener("resize", updateStyles);
+  updateStyles(); // Run on load
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+      const LANDING_SECTIONS = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll("nav a");
+
+      // Prevent duplicate observers
+      if (window.navObserver) {
+        window.navObserver.disconnect();
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              navLinks.forEach((link) => {
+                if (link.getAttribute("href") === `#${entry.target.id}`) {
+                  link.classList.add("text-blue-500", "font-bold"); // Add active styles
+                } else {
+                  link.classList.remove("text-blue-500", "font-bold"); // Remove styles
+                }
+              });
+            }
+          });
+        },
+        { threshold: 0.3 } // Trigger when 50% of the section is visible
+      );
+
+      LANDING_SECTIONS.forEach((section) => observer.observe(section));
+    },
+    500
+  );
+</script>
+
+<style>
+  nav {
+    animation: nav-shadown 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  }
+
+  @keyframes nav-shadown {
+    0% {
+      background-color: transparent;
+    }
+    to {
+      background-color: color-mix(
+        in oklab,
+        var(--color-primary) /* #0a2239 */ 80%,
+        transparent
+      );
+    }
+  }
+</style>
